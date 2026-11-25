@@ -25,7 +25,7 @@
       <h2 id="formTitle">Добавить поезд</h2>
       <form id="entryForm">
         <div class="form-grid">
-          <label class="field">Дата (ДД.ММ)<input name="date" required placeholder="28.06" pattern="[0-3][0-9]\.[0-1][0-9]" title="Формат ДД.ММ, например 28.06" maxlength="5"></label>
+          <label class="field">Дата (ДД.ММ)<input name="date" required value="13.12" placeholder="ДД.ММ" pattern="[0-3][0-9]\.[0-1][0-9]" title="Формат ДД.ММ, например 13.12" maxlength="5"></label>
           <label class="field">Номер<input name="number" required placeholder="159К" maxlength="12"></label>
           <label class="field">Отпр.<input name="dep" type="time" required></label>
           <label class="field">Приб.<input name="arr" type="time" required></label>
@@ -85,7 +85,7 @@
   function save(){try{localStorage.setItem(KEY,JSON.stringify(entries));return true;}catch(e){toast('Не удалось сохранить данные в браузере');return false;}}
   var toastTimer;function toast(s){var t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2200);}
   function render(){var q=$('search').value.trim().toLocaleLowerCase('ru');var list=entries.map(function(x,i){return {x:x,i:i};}).filter(function(o){return (o.x.number+' '+o.x.route).toLocaleLowerCase('ru').includes(q);});$('summary').textContent=list.length+' из '+entries.length;$('empty').hidden=list.length>0;$('rows').innerHTML=list.map(function(o){var x=o.x;return '<tr class="data-row">'+fields.map(function(k){var cls=k==='date'?'date-cell':k==='number'?'train-cell':k==='route'?'route-cell':'';var value=x[k]||'';return '<td class="'+cls+'">'+esc(value)+(k==='route'?'<span class="row-actions"><button class="icon-btn" type="button" data-edit="'+o.i+'" aria-label="Изменить поезд">Изменить</button><button class="icon-btn delete" type="button" data-delete="'+o.i+'" aria-label="Удалить поезд">Удалить</button></span>':'')+'</td>';}).join('')+'</tr>';}).join('');}
-  function reset(){editing=-1;$('entryForm').reset();$('submitBtn').textContent='Добавить в таблицу';$('cancelEdit').hidden=true;$('formTitle').textContent='Добавить поезд';}
+  function reset(){editing=-1;$('entryForm').reset();document.querySelector('[name="date"]').value='13.12';$('submitBtn').textContent='Добавить в таблицу';$('cancelEdit').hidden=true;$('formTitle').textContent='Добавить поезд';}
   $('entryForm').addEventListener('submit',function(e){e.preventDefault();var wasEditing=editing>=0,fd=new FormData(this),x={};fields.forEach(function(k){var v=fd.get(k);x[k]=keys.indexOf(k)>=0?(v===''?'':String(Number(v))):String(v||'').trim();});if(wasEditing)entries[editing]=x;else entries.push(x);save();reset();render();toast(wasEditing?'Изменения сохранены':'Поезд добавлен');});
   $('cancelEdit').addEventListener('click',reset);$('search').addEventListener('input',render);
   $('rows').addEventListener('click',function(e){var edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(edit){editing=Number(edit.dataset.edit);var x=entries[editing];fields.forEach(function(k){var el=document.querySelector('[name="'+k+'"]');el.value=x[k]||'';});$('submitBtn').textContent='Сохранить изменения';$('cancelEdit').hidden=false;$('formTitle').textContent='Изменить поезд';$('entryForm').scrollIntoView({behavior:'smooth',block:'start'});}else if(del){var i=Number(del.dataset.delete);entries.splice(i,1);save();render();toast('Поезд удалён');}});
