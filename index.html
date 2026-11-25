@@ -9,72 +9,89 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{color-scheme:light;--bg:#f4f5f3;--surface:#fff;--ink:#18232b;--muted:#5d6b75;--line:#dde2e0;--accent:#1c5566;--accent-ink:#fff;--accent-soft:#e1eef1;--warn:#8a5a00;--warn-soft:#fbefd2;--font:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif}
-@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#11181d;--surface:#192228;--ink:#e7edf0;--muted:#98a7b0;--line:#2a373f;--accent:#6fb7c9;--accent-ink:#0c1a20;--accent-soft:#1d3640;--warn:#f0c36a;--warn-soft:#3a2f14}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--font);font-variant-numeric:tabular-nums}button,input,select,textarea{font:inherit;color:inherit}button,a,input,select,textarea{outline-offset:2px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent)}.app{max-width:1200px;margin:auto;min-height:100vh;background:var(--surface)}.top{display:flex;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--line)}.logo{font-weight:700;font-size:17px}.top .right{margin-left:auto}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:var(--accent);color:var(--accent-ink);padding:9px 14px;font-weight:600;text-decoration:none;cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--accent)}.btn.small{padding:6px 10px;font-size:13px}.content{padding:28px clamp(16px,4vw,42px) 42px}h1{font-size:26px;line-height:1.2;margin:0}.intro{color:var(--muted);margin:6px 0 22px}.source{color:var(--accent);font-weight:600}.layout{display:grid;grid-template-columns:minmax(280px,350px) minmax(0,1fr);gap:18px;align-items:start}.panel{border:1px solid var(--line);border-radius:12px;padding:18px;background:var(--surface)}h2{font-size:16px;margin:0 0 14px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:5px;font-size:12.5px;font-weight:600}.field.wide{grid-column:1/-1}.field input,.field select,.field textarea,.search{min-width:0;width:100%;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:9px 10px;font-weight:400}.field textarea{resize:vertical;min-height:70px}.counts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:15px;padding-top:14px;border-top:1px solid var(--line)}.count-title{grid-column:1/-1;color:var(--muted);font-size:12px;font-weight:600}.actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:16px}.hint{color:var(--muted);font-size:12px;margin-top:12px}.toolbar{display:flex;gap:8px;align-items:center;margin:0 0 12px}.toolbar .search{flex:1}.summary{font-size:12.5px;color:var(--muted);margin-left:auto;white-space:nowrap}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:10px}table{border-collapse:collapse;width:100%;min-width:760px;font-size:13px}th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--muted);font-size:11px;font-weight:600;white-space:nowrap;background:var(--bg)}tbody tr:last-child td{border-bottom:0}.route{font-weight:600;white-space:nowrap}.sub{color:var(--muted);font-size:11.5px;margin-top:2px}.badge{display:inline-block;border-radius:999px;background:var(--accent-soft);color:var(--accent);padding:2px 7px;font-size:11px;font-weight:600}.empty{padding:28px 16px;text-align:center;color:var(--muted)}.row-actions{white-space:nowrap}.icon-btn{border:0;background:none;color:var(--accent);cursor:pointer;padding:3px 5px;font-size:12px}.icon-btn.delete{color:#a33}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);border-radius:8px;padding:9px 14px;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}.privacy{color:var(--muted);font-size:12px;margin-top:14px}@media(max-width:800px){.layout{grid-template-columns:1fr}.content{padding-top:22px}.top{padding:12px 16px}}@media(max-width:420px){.form-grid{grid-template-columns:1fr}.field.wide{grid-column:auto}.counts{grid-template-columns:1fr 1fr}.summary{width:100%;margin-left:0}.toolbar{flex-wrap:wrap}}
+:root{color-scheme:light;--bg:#f4f5f3;--surface:#fff;--ink:#18232b;--muted:#5d6b75;--line:#dde2e0;--accent:#1c5566;--accent-ink:#fff;--accent-soft:#e1eef1;--danger:#a33;--font:"Onest",system-ui,-apple-system,"Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root{color-scheme:dark;--bg:#11181d;--surface:#192228;--ink:#e7edf0;--muted:#98a7b0;--line:#2a373f;--accent:#6fb7c9;--accent-ink:#0c1a20;--accent-soft:#1d3640;--danger:#ff8c84}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 var(--font);font-variant-numeric:tabular-nums}button,input{font:inherit;color:inherit}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.app{max-width:1440px;min-height:100vh;margin:auto;background:var(--surface)}.top{display:flex;align-items:center;gap:12px;padding:14px 22px;border-bottom:1px solid var(--line)}.logo{font-size:17px;font-weight:700}.top .right{margin-left:auto}.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:var(--accent);color:var(--accent-ink);padding:9px 14px;font-weight:600;text-decoration:none;cursor:pointer}.btn:hover{filter:brightness(1.08)}.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--accent)}.btn.small{padding:6px 10px;font-size:13px}.content{padding:24px clamp(14px,3vw,36px) 40px}h1{font-size:25px;line-height:1.2;margin:0}.intro{color:var(--muted);margin:5px 0 18px}.source{color:var(--accent);font-weight:600}.panel{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface);margin-bottom:16px}.panel h2{font-size:15px;margin:0 0 12px}.form-grid{display:grid;grid-template-columns:repeat(5,minmax(100px,1fr));gap:10px}.field{display:flex;flex-direction:column;gap:4px;min-width:0;font-size:12px;font-weight:600}.field.route{grid-column:span 1}.field input{width:100%;min-width:0;border:1px solid var(--line);border-radius:7px;background:var(--bg);padding:8px 9px;font-weight:400}.counts{display:grid;grid-template-columns:repeat(8,minmax(60px,1fr));gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}.count-title{grid-column:1/-1;color:var(--muted);font-size:12px;font-weight:600}.form-actions{display:flex;gap:8px;align-items:center;margin-top:12px}.hint{color:var(--muted);font-size:12px;margin:10px 0 0}.toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px}.search{flex:1;min-width:130px;border:1px solid var(--line);border-radius:8px;background:var(--bg);padding:8px 10px}.summary{color:var(--muted);font-size:12px;white-space:nowrap}.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:9px}table{border-collapse:collapse;width:100%;min-width:1050px;font-size:12.5px}th,td{text-align:center;padding:8px 9px;border-bottom:1px solid var(--line);white-space:nowrap}th{background:var(--bg);font-size:11.5px;font-weight:700}tbody tr:last-child td{border-bottom:0}td.route-cell{text-align:left;white-space:normal;min-width:175px;font-weight:600}td.date-cell,td.train-cell{font-weight:600}.row-actions{display:inline-flex;gap:2px;margin-left:8px;opacity:.2;transition:opacity .15s}.data-row:hover .row-actions,.row-actions:focus-within{opacity:1}.icon-btn{border:0;border-radius:4px;background:transparent;color:var(--accent);cursor:pointer;padding:2px 4px;font-size:11px}.icon-btn:hover{background:var(--accent-soft)}.icon-btn.delete{color:var(--danger)}.empty{padding:24px;text-align:center;color:var(--muted)}.privacy{font-size:11px;color:var(--muted);margin:10px 0 0}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);border-radius:8px;padding:9px 14px;opacity:0;pointer-events:none;transition:opacity .2s}.toast.show{opacity:1}
+@media(max-width:900px){.form-grid{grid-template-columns:repeat(3,minmax(100px,1fr))}.counts{grid-template-columns:repeat(4,minmax(65px,1fr))}}@media(max-width:520px){.content{padding-top:18px}.form-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.toolbar{flex-wrap:wrap}.summary{margin-left:auto}.panel{padding:12px}}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="top"><span class="logo">Места на поезда УЗ</span><a class="btn small ghost" href="index.html">← К CRM</a><a class="btn small ghost right" href="https://booking.uz.gov.ua" target="_blank" rel="noopener">Открыть booking.uz.gov.ua ↗</a></header>
+  <header class="top"><span class="logo">Свободные места на поезда УЗ</span><a class="btn small ghost right" href="https://booking.uz.gov.ua" target="_blank" rel="noopener">Открыть booking.uz.gov.ua ↗</a></header>
   <main class="content">
-    <h1>Свободные места</h1>
-    <p class="intro">Переносите сюда данные о наличии мест вручную. <a class="source" href="https://booking.uz.gov.ua" target="_blank" rel="noopener">Источник: booking.uz.gov.ua ↗</a></p>
-    <div class="layout">
-      <section class="panel" aria-labelledby="formTitle">
-        <h2 id="formTitle">Новая проверка</h2>
-        <form id="entryForm">
-          <div class="form-grid">
-            <label class="field">Откуда<input id="from" name="from" required maxlength="80" placeholder="Киев"></label>
-            <label class="field">Куда<input id="to" name="to" required maxlength="80" placeholder="Львов"></label>
-            <label class="field">Дата отправления<input id="date" name="date" type="date" required></label>
-            <label class="field">Время отправления<input id="time" name="time" type="time"></label>
-            <label class="field">Номер поезда<input id="train" name="train" maxlength="20" placeholder="045Л"></label>
-            <label class="field">Проверено в<input id="checkedAt" name="checkedAt" type="datetime-local" required></label>
-          </div>
-          <div class="counts">
-            <span class="count-title">Свободные места по типу вагона</span>
-            <label class="field">Купе<input name="kupe" type="number" min="0" step="1" placeholder="—"></label>
-            <label class="field">Плацкарт<input name="platzkart" type="number" min="0" step="1" placeholder="—"></label>
-            <label class="field">СВ<input name="sv" type="number" min="0" step="1" placeholder="—"></label>
-            <label class="field">Люкс<input name="lux" type="number" min="0" step="1" placeholder="—"></label>
-          </div>
-          <label class="field wide" style="margin-top:12px">Заметка<textarea name="note" maxlength="500" placeholder="Например, уточнение по пересадке или вагону"></textarea></label>
-          <div class="actions"><button class="btn" type="submit" id="submitBtn">Сохранить проверку</button><button class="btn ghost" type="button" id="cancelEdit" hidden>Отмена</button></div>
-        </form>
-        <p class="hint">Оставьте поле пустым, если такой тип мест не отображался. Каждая запись сохраняется с датой и временем проверки.</p>
-      </section>
-      <section class="panel" aria-labelledby="historyTitle">
-        <h2 id="historyTitle">История проверок</h2>
-        <div class="toolbar"><input class="search" id="search" type="search" placeholder="Поиск по маршруту или поезду" aria-label="Поиск по маршруту или номеру поезда"><button class="btn small ghost" id="exportBtn" type="button">Экспорт CSV</button><span class="summary" id="summary"></span></div>
-        <div class="table-wrap"><table><thead><tr><th>Маршрут / поезд</th><th>Отправление</th><th>Проверено</th><th>Купе</th><th>Плацкарт</th><th>СВ</th><th>Люкс</th><th>Заметка</th><th></th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty">Пока нет записей. Добавьте первую проверку слева.</div></div>
-        <p class="privacy">Записи хранятся в локальном хранилище этого браузера.</p>
-      </section>
-    </div>
+    <h1>Наличие мест</h1>
+    <p class="intro">Вносите данные с сайта <a class="source" href="https://booking.uz.gov.ua" target="_blank" rel="noopener">booking.uz.gov.ua ↗</a> вручную.</p>
+    <section class="panel" aria-labelledby="formTitle">
+      <h2 id="formTitle">Добавить поезд</h2>
+      <form id="entryForm">
+        <div class="form-grid">
+          <label class="field">Дата (ДД.ММ)<input name="date" required placeholder="28.06" pattern="[0-3][0-9]\.[0-1][0-9]" title="Формат ДД.ММ, например 28.06" maxlength="5"></label>
+          <label class="field">Номер<input name="number" required placeholder="159К" maxlength="12"></label>
+          <label class="field">Отпр.<input name="dep" type="time" required></label>
+          <label class="field">Приб.<input name="arr" type="time" required></label>
+          <label class="field">Маршрут<input name="route" required placeholder="КИЕВ - ЛЬВОВ" maxlength="100"></label>
+        </div>
+        <div class="counts">
+          <span class="count-title">Свободные места</span>
+          <label class="field">Л<input name="l" type="number" min="0" step="1"></label>
+          <label class="field">К<input name="k" type="number" min="0" step="1"></label>
+          <label class="field">ЖК<input name="jk" type="number" min="0" step="1"></label>
+          <label class="field">ДК<input name="dk" type="number" min="0" step="1"></label>
+          <label class="field">П<input name="p" type="number" min="0" step="1"></label>
+          <label class="field">С1<input name="s1" type="number" min="0" step="1"></label>
+          <label class="field">С2<input name="s2" type="number" min="0" step="1"></label>
+          <label class="field">С3<input name="s3" type="number" min="0" step="1"></label>
+        </div>
+        <div class="form-actions"><button class="btn" id="submitBtn" type="submit">Добавить в таблицу</button><button class="btn small ghost" id="cancelEdit" type="button" hidden>Отмена</button></div>
+      </form>
+    </section>
+    <section class="panel" aria-labelledby="tableTitle">
+      <h2 id="tableTitle">Поезда</h2>
+      <div class="toolbar"><input class="search" id="search" type="search" placeholder="Поиск по номеру или маршруту" aria-label="Поиск по номеру или маршруту"><button class="btn small ghost" id="exportBtn" type="button">Экспорт CSV</button><span class="summary" id="summary"></span></div>
+      <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="rows"></tbody></table><div class="empty" id="empty" hidden>Поездов пока нет. Добавьте запись выше.</div></div>
+      <p class="privacy">Данные сохраняются в этом браузере. Сохраняйте резервную копию через экспорт CSV.</p>
+    </section>
   </main>
 </div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
   'use strict';
-  var KEY='uzTrainChecksV1',fields=['kupe','platzkart','sv','lux'],entries=[],editing=null;
-  var $=function(id){return document.getElementById(id);};
-  var esc=function(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});};
-  function load(){try{var d=JSON.parse(localStorage.getItem(KEY)||'[]');entries=Array.isArray(d)?d:[];}catch(e){entries=[];}}
-  function persist(){try{localStorage.setItem(KEY,JSON.stringify(entries));return true;}catch(e){toast('Не удалось сохранить данные в этом браузере');return false;}}
-  function dateFmt(s,opts){if(!s)return '—';var d=new Date(s+'T00:00:00');return isNaN(d)?s:d.toLocaleDateString('ru-RU',opts||{day:'2-digit',month:'2-digit',year:'numeric'});}
-  function checkedFmt(s){if(!s)return '—';var d=new Date(s);return isNaN(d)?s:d.toLocaleString('ru-RU',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});}
-  var toastTimer;function toast(s){var t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2400);}
-  function render(){var q=$('search').value.trim().toLocaleLowerCase('ru'),list=entries.filter(function(x){return [x.from,x.to,x.train].join(' ').toLocaleLowerCase('ru').includes(q);}).sort(function(a,b){return String(b.checkedAt).localeCompare(String(a.checkedAt));});$('summary').textContent=list.length+' из '+entries.length;
-    $('empty').hidden=list.length>0;$('rows').innerHTML=list.map(function(x){return '<tr><td><div class="route">'+esc(x.from)+' → '+esc(x.to)+'</div><div class="sub">'+(x.train?'Поезд '+esc(x.train):'Номер не указан')+'</div></td><td>'+dateFmt(x.date)+(x.time?' <span class="badge">'+esc(x.time)+'</span>':'')+'</td><td>'+checkedFmt(x.checkedAt)+'</td>'+fields.map(function(k){return '<td>'+(x[k]===''||x[k]==null?'—':esc(x[k]))+'</td>';}).join('')+'<td>'+ (x.note?esc(x.note):'—')+'</td><td class="row-actions"><button class="icon-btn" type="button" data-edit="'+esc(x.id)+'" aria-label="Изменить запись">Изменить</button><button class="icon-btn delete" type="button" data-delete="'+esc(x.id)+'" aria-label="Удалить запись">Удалить</button></td></tr>';}).join('');}
-  function localDateTime(){var d=new Date(),pad=function(n){return String(n).padStart(2,'0');};return {date:d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate()),time:d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())+'T'+pad(d.getHours())+':'+pad(d.getMinutes())};}
-  function reset(){editing=null;$('entryForm').reset();var now=localDateTime();$('date').value=now.date;$('checkedAt').value=now.time;$('submitBtn').textContent='Сохранить проверку';$('cancelEdit').hidden=true;$('formTitle').textContent='Новая проверка';}
-  $('entryForm').addEventListener('submit',function(e){e.preventDefault();var wasEditing=!!editing,fd=new FormData(this),v={id:editing||String(Date.now())+Math.random().toString(16).slice(2),from:String(fd.get('from')).trim(),to:String(fd.get('to')).trim(),date:fd.get('date'),time:fd.get('time'),train:String(fd.get('train')).trim(),checkedAt:fd.get('checkedAt'),note:String(fd.get('note')).trim()};fields.forEach(function(k){v[k]=fd.get(k)===''?'':Number(fd.get(k));});if(editing){var i=entries.findIndex(function(x){return x.id===editing;});if(i>=0)entries[i]=v;}else entries.push(v);persist();reset();render();toast(wasEditing?'Изменения сохранены':'Проверка добавлена');});
+  var KEY='uzTrainTableV2',keys=['l','k','jk','dk','p','s1','s2','s3'];
+  var headers=['Дата','Номер','Отпр.','Приб.','Л','К','ЖК','ДК','П','С1','С2','С3','Маршрут'];
+  var fields=['date','number','dep','arr'].concat(keys,['route']);
+  var defaults=[
+    ['28.06','159К','10:18','19:37','','','','','','46','','','КИЕВ - ТРУСКАВЕЦ'],
+    ['28.06','079П','06:11','13:34','3','3','','','','','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','743К','07:00','12:40','','','','','','1','1','','КИЕВ - ЛЬВОВ'],
+    ['28.06','063О','07:35','14:30','1','12','','','','','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','291КО','07:36','15:14','42','','','','','194','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','009К','10:18','16:22','','1','','','','','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','159К','10:18','16:22','','','','','','46','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','045Д','14:11','22:38','','','','','','','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','043Ш','20:38','03:43','','','','','','','','','КИЕВ - ЛЬВОВ'],
+    ['28.06','857К','07:16','11:43','','','','','','','291','','КИЕВ - ХМЕЛЬНИЦКИЙ'],
+    ['28.06','099К','06:52','09:12','','9','','','','','','','КИЕВ - ВИННИЦА'],
+    ['28.06','857К','07:16','09:56','','','','','','','298','','КИЕВ - ВИННИЦА'],
+    ['28.06','287К','10:26','12:59','1','','','','','','','','КИЕВ - ВИННИЦА'],
+    ['28.06','045Д','14:11','16:37','','','','','','','','','КИЕВ - ВИННИЦА'],
+    ['28.06','763К','14:34','17:04','','','','','','11','','','КИЕВ - ВИННИЦА'],
+    ['28.06','351К','16:40','19:13','','','','','','','','','КИЕВ - ВИННИЦА'],
+    ['28.06','143О','16:48','19:29','','','','','','','','','КИЕВ - ВИННИЦА']
+  ].map(function(row){var x={};fields.forEach(function(k,i){x[k]=row[i]||'';});return x;});
+  var $=function(id){return document.getElementById(id);},entries=[],editing=-1;
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function load(){try{var raw=localStorage.getItem(KEY);entries=raw?JSON.parse(raw):defaults.map(function(x){return Object.assign({},x);});if(!Array.isArray(entries))entries=[];}catch(e){entries=defaults.map(function(x){return Object.assign({},x);});}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(entries));return true;}catch(e){toast('Не удалось сохранить данные в браузере');return false;}}
+  var toastTimer;function toast(s){var t=$('toast');t.textContent=s;t.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(function(){t.classList.remove('show');},2200);}
+  function render(){var q=$('search').value.trim().toLocaleLowerCase('ru');var list=entries.map(function(x,i){return {x:x,i:i};}).filter(function(o){return (o.x.number+' '+o.x.route).toLocaleLowerCase('ru').includes(q);});$('summary').textContent=list.length+' из '+entries.length;$('empty').hidden=list.length>0;$('rows').innerHTML=list.map(function(o){var x=o.x;return '<tr class="data-row">'+fields.map(function(k){var cls=k==='date'?'date-cell':k==='number'?'train-cell':k==='route'?'route-cell':'';var value=x[k]||'';return '<td class="'+cls+'">'+esc(value)+(k==='route'?'<span class="row-actions"><button class="icon-btn" type="button" data-edit="'+o.i+'" aria-label="Изменить поезд">Изменить</button><button class="icon-btn delete" type="button" data-delete="'+o.i+'" aria-label="Удалить поезд">Удалить</button></span>':'')+'</td>';}).join('')+'</tr>';}).join('');}
+  function reset(){editing=-1;$('entryForm').reset();$('submitBtn').textContent='Добавить в таблицу';$('cancelEdit').hidden=true;$('formTitle').textContent='Добавить поезд';}
+  $('entryForm').addEventListener('submit',function(e){e.preventDefault();var wasEditing=editing>=0,fd=new FormData(this),x={};fields.forEach(function(k){var v=fd.get(k);x[k]=keys.indexOf(k)>=0?(v===''?'':String(Number(v))):String(v||'').trim();});if(wasEditing)entries[editing]=x;else entries.push(x);save();reset();render();toast(wasEditing?'Изменения сохранены':'Поезд добавлен');});
   $('cancelEdit').addEventListener('click',reset);$('search').addEventListener('input',render);
-  $('rows').addEventListener('click',function(e){var edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(edit){var x=entries.find(function(y){return y.id===edit.dataset.edit;});if(!x)return;editing=x.id;['from','to','date','time','train','checkedAt','note'].forEach(function(k){$(k).value=x[k]||'';});fields.forEach(function(k){document.querySelector('[name="'+k+'"]').value=x[k]==null?'':x[k];});$('submitBtn').textContent='Сохранить изменения';$('cancelEdit').hidden=false;$('formTitle').textContent='Изменить проверку';$('from').focus();}else if(del){entries=entries.filter(function(x){return x.id!==del.dataset.delete;});persist();render();toast('Запись удалена');}});
+  $('rows').addEventListener('click',function(e){var edit=e.target.closest('[data-edit]'),del=e.target.closest('[data-delete]');if(edit){editing=Number(edit.dataset.edit);var x=entries[editing];fields.forEach(function(k){var el=document.querySelector('[name="'+k+'"]');el.value=x[k]||'';});$('submitBtn').textContent='Сохранить изменения';$('cancelEdit').hidden=false;$('formTitle').textContent='Изменить поезд';$('entryForm').scrollIntoView({behavior:'smooth',block:'start'});}else if(del){var i=Number(del.dataset.delete);entries.splice(i,1);save();render();toast('Поезд удалён');}});
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}
-  $('exportBtn').addEventListener('click',function(){var keys=['from','to','date','time','train','checkedAt','kupe','platzkart','sv','lux','note'],headers=['Откуда','Куда','Дата отправления','Время отправления','Номер поезда','Проверено','Купе','Плацкарт','СВ','Люкс','Заметка'];var csv='\uFEFF'+[headers].concat(entries.map(function(x){return keys.map(function(k){return x[k]??'';});})).map(function(row){return row.map(csvCell).join(';');}).join('\r\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='uz-mesta-'+new Date().toISOString().slice(0,10)+'.csv';a.click();URL.revokeObjectURL(a.href);});
-  reset();load();render();
+  $('exportBtn').addEventListener('click',function(){var csv='\uFEFF'+[headers].concat(entries.map(function(x){return fields.map(function(k){return x[k]||'';});})).map(function(r){return r.map(csvCell).join(';');}).join('\r\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='uz-mesta.csv';a.click();URL.revokeObjectURL(a.href);});
+  load();render();
 })();
 </script>
 </body>
