@@ -27,8 +27,8 @@
         <div class="form-grid">
           <label class="field">Дата (ДД.ММ)<input name="date" required value="13.12" placeholder="ДД.ММ" pattern="[0-3][0-9]\.[0-1][0-9]" title="Формат ДД.ММ, например 13.12" maxlength="5"></label>
           <label class="field">Номер<input name="number" required placeholder="159К" maxlength="12"></label>
-          <label class="field">Отпр.<input name="dep" type="time" required></label>
-          <label class="field">Приб.<input name="arr" type="time" required></label>
+          <label class="field">Отпр.<input name="dep" type="time" step="60" required></label>
+          <label class="field">Приб.<input name="arr" type="time" step="60" required></label>
           <label class="field">Станция отправления<input name="stationFrom" required placeholder="КИЕВ" maxlength="50"></label>
           <label class="field">Станция прибытия<input name="stationTo" required placeholder="ЛЬВОВ" maxlength="50"></label>
         </div>
