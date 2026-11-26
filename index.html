@@ -135,7 +135,7 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
   function csvCell(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}
   $('exportBtn').addEventListener('click',function(){var csv='\uFEFF'+[headers].concat(entries.map(function(x){return fields.map(function(k){return x[k]||'';});})).map(function(r){return r.map(csvCell).join(';');}).join('\r\n');var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));a.download='uz-mesta.csv';a.click();URL.revokeObjectURL(a.href);});
   var imageTable=null;
-  var seatNames={l:'Люкс',k:'Купе',jk:'Женское',dk:'Детское',p:'Плацкарт',s1:'1 класс',s2:'2 класс',s3:'3 класс'};
+  var seatNames={l:'Люкс',k:'Купе',jk:'Женское купе',dk:'Детское купе',p:'Плацкарт',s1:'1 класс',s2:'2 класс',s3:'3 класс'};
   var monthNames=['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря'];
   function hasSeats(x){return keys.some(function(k){return Number(x[k])>0;});}
   function longDate(value){var m=String(value||'').match(/^(\d{1,2})\.(\d{1,2})$/);return m&&monthNames[m[2]-1]?Number(m[1])+' '+monthNames[m[2]-1]:(value||'Без даты');}
@@ -162,8 +162,8 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
     box(0,0,full,height,'#ffffff');
     write(title,pad,pad+14,font(700,28),'#18232b');
     var now=new Date();write('Свободные места · на '+now.toLocaleDateString('ru-RU')+', '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),pad,pad+46,font(400,16),'#5d6b75');
-    var x0=pad;cols.forEach(function(col){write(col.name,x0+col.w/2,top-headH/2,font(600,16),'#5d6b75','center');x0+=col.w;});box(pad,top-2,width,2,'#18232b');
-    var y=top;blocks.forEach(function(b){if(b.type==='route')write(b.text,pad,y+b.h/2+4,font(700,22),'#1c5566');else if(b.type==='date')write(b.text,pad+8,y+b.h/2+4,font(700,20),'#18232b');else{box(pad,y,width,b.h,b.fill);box(pad,y+b.h-1,width,1,'#d3dbd9');var left=pad;cols.forEach(function(col){var value=b.x[col.k],seat=keys.indexOf(col.k)>=0,empty=seat&&!(Number(value)>0);write(empty?'—':(value||'—'),left+col.w/2,y+b.h/2,font(empty?400:(col.k==='dep'||col.k==='arr'?500:700),22),empty?'#8b979e':'#18232b','center');left+=col.w;});}y+=b.h;});
+    var tints={jk:'#f8d7e5',dk:'#d5ecda'};var x0=pad;cols.forEach(function(col){if(tints[col.k])box(x0,top-headH,col.w,headH-2,tints[col.k]);write(col.name,x0+col.w/2,top-headH/2,font(600,16),'#5d6b75','center');x0+=col.w;});box(pad,top-2,width,2,'#18232b');
+    var y=top;blocks.forEach(function(b){if(b.type==='route')write(b.text,pad,y+b.h/2+4,font(700,22),'#1c5566');else if(b.type==='date')write(b.text,pad+8,y+b.h/2+4,font(700,20),'#18232b');else{box(pad,y,width,b.h,b.fill);box(pad,y+b.h-1,width,1,'#d3dbd9');var left=pad;cols.forEach(function(col){if(tints[col.k])box(left,y,col.w,b.h-1,tints[col.k]);var value=b.x[col.k],seat=keys.indexOf(col.k)>=0,empty=seat&&!(Number(value)>0);write(empty?'—':(value||'—'),left+col.w/2,y+b.h/2,font(empty?400:(col.k==='dep'||col.k==='arr'?500:700),22),empty?'#8b979e':'#18232b','center');left+=col.w;});}y+=b.h;});
     return canvas;
   }
   function updateImage(){var rows=(visible[imageTable.id]||[]).filter(function(x){return !$('hideSoldOut').checked||hasSeats(x);});var preview=$('imagePreview');preview.textContent=rows.length?'':'Нет поездов с местами.';if(rows.length)preview.appendChild(drawImage(rows,imageTable.label));$('downloadImage').disabled=$('copyImage').disabled=!rows.length;}
