@@ -49,6 +49,12 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
       <h3 class="table-subtitle">В Харьков</h3>
       <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="toKhRows"></tbody></table><div class="empty" id="toKhEmpty" hidden>Поездов в Харьков пока нет.</div></div>
       <button class="btn small ghost add-row" type="button" data-add="toKh">+ Добавить строку</button>
+      <h3 class="table-subtitle">Из Одессы</h3>
+      <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="fromOdRows"></tbody></table><div class="empty" id="fromOdEmpty" hidden>Поездов из Одессы пока нет.</div></div>
+      <button class="btn small ghost add-row" type="button" data-add="fromOd">+ Добавить строку</button>
+      <h3 class="table-subtitle">В Одессу</h3>
+      <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="toOdRows"></tbody></table><div class="empty" id="toOdEmpty" hidden>Поездов в Одессу пока нет.</div></div>
+      <button class="btn small ghost add-row" type="button" data-add="toOd">+ Добавить строку</button>
       <p class="privacy">Данные сохраняются в этом браузере. Сохраняйте резервную копию через экспорт CSV.</p>
     </section>
   </main>
@@ -92,7 +98,8 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
   function compareRows(a,b){var day=dateOrder(a.x.date)-dateOrder(b.x.date);if(day)return day;var departure=timeOrder(a.x.dep)-timeOrder(b.x.dep);if(departure)return departure;var sameNumber=String(a.x.number||'').toLocaleUpperCase('ru')===String(b.x.number||'').toLocaleUpperCase('ru');if(sameNumber)return arrivalOrder(b.x)-arrivalOrder(a.x);return a.i-b.i;}
   function isKyivStation(value){return /^(?:київ|киев|kyiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
   function isKharkivStation(value){return /^(?:харків|харьков|kharkiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
-  var tableDefs=[{id:'from',label:'Из Киева',city:isKyivStation,end:0,template:'Киев - ?'},{id:'to',label:'В Киев',city:isKyivStation,end:1,template:'? - Киев'},{id:'fromKh',label:'Из Харькова',city:isKharkivStation,end:0,template:'Харьков - ?'},{id:'toKh',label:'В Харьков',city:isKharkivStation,end:1,template:'? - Харьков'}];
+  function isOdesaStation(value){return /^(?:одеса|одесса|odesa|odessa)(?:[-\s.]|$)/i.test(String(value||'').trim());}
+  var tableDefs=[{id:'from',label:'Из Киева',city:isKyivStation,end:0,template:'Киев - ?'},{id:'to',label:'В Киев',city:isKyivStation,end:1,template:'? - Киев'},{id:'fromKh',label:'Из Харькова',city:isKharkivStation,end:0,template:'Харьков - ?'},{id:'toKh',label:'В Харьков',city:isKharkivStation,end:1,template:'? - Харьков'},{id:'fromOd',label:'Из Одессы',city:isOdesaStation,end:0,template:'Одесса - ?'},{id:'toOd',label:'В Одессу',city:isOdesaStation,end:1,template:'? - Одесса'}];
   function inTable(row,table){var parts=String(row.route||'').split(/\s+-\s+|→|->/);return parts.length>1&&table.city(parts[table.end?parts.length-1:0]);}
   function trainKey(x){return String(x.number||'').trim().toLocaleUpperCase('ru').replace(/^777[КKОO]$/,'777К/О');}
   function trainTones(table){var tones=new Map();entries.map(function(x,i){return {x:x,i:i};}).filter(function(o){return inTable(o.x,table);}).sort(compareRows).forEach(function(o){var n=trainKey(o.x);if(n&&!tones.has(n))tones.set(n,tones.size%2?'tone-b':'tone-a');});return tones;}
