@@ -143,11 +143,11 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
     var seats=keys.filter(function(k){return rows.some(function(x){return Number(x[k])>0;});});
     var routes=[];rows.forEach(function(x){var r=String(x.route||'').trim();if(routes.indexOf(r)<0)routes.push(r);});
     var cols=[{k:'number',name:'Поезд'},{k:'dep',name:'Отпр.'},{k:'arr',name:'Приб.'}].concat(seats.map(function(k){return {k:k,name:seatNames[k]};}));
-    var family='Onest,system-ui,"Segoe UI",sans-serif',pad=24,rowH=48,headH=40,dateH=46,routeH=48;
+    var family='Onest,system-ui,"Segoe UI",sans-serif',pad=24,rowH=48,headH=60,dateH=46,routeH=48;
     function font(weight,size){return weight+' '+size+'px '+family;}
     var canvas=document.createElement('canvas'),c=canvas.getContext('2d');
     function textWidth(text,f){c.font=f;return c.measureText(text).width;}
-    cols.forEach(function(col){var w=textWidth(col.name,font(600,16));rows.forEach(function(x){w=Math.max(w,textWidth(x[col.k]||'—',font(700,22)));});col.w=Math.ceil(w)+28;});
+    var colW=0;cols.forEach(function(col){col.name.split(' ').forEach(function(word){colW=Math.max(colW,textWidth(word,font(600,16)));});rows.forEach(function(x){colW=Math.max(colW,textWidth(x[col.k]||'—',font(700,22)));});});colW=Math.ceil(colW)+24;cols.forEach(function(col){col.w=colW;});
     var title=routes.length===1?routes[0].replace(' - ',' → '):label;
     var tableW=cols.reduce(function(sum,col){return sum+col.w;},0);
     var need=Math.max(textWidth(title,font(700,28)),textWidth('Свободные места · на 00.00.0000, 00:00',font(400,16)));
@@ -162,7 +162,7 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
     box(0,0,full,height,'#ffffff');
     write(title,pad,pad+14,font(700,28),'#18232b');
     var now=new Date();write('Свободные места · на '+now.toLocaleDateString('ru-RU')+', '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'}),pad,pad+46,font(400,16),'#5d6b75');
-    var tints={jk:'#f8d7e5',dk:'#d5ecda'};var x0=pad;cols.forEach(function(col){if(tints[col.k])box(x0,top-headH,col.w,headH-2,tints[col.k]);write(col.name,x0+col.w/2,top-headH/2,font(600,16),'#5d6b75','center');x0+=col.w;});box(pad,top-2,width,2,'#18232b');
+    var tints={jk:'#f8d7e5',dk:'#d5ecda'};var x0=pad;cols.forEach(function(col){if(tints[col.k])box(x0,top-headH,col.w,headH-2,tints[col.k]);var words=col.name.split(' ');words.forEach(function(word,n){write(word,x0+col.w/2,top-headH/2+(n-(words.length-1)/2)*20,font(600,16),'#5d6b75','center');});x0+=col.w;});box(pad,top-2,width,2,'#18232b');
     var y=top;blocks.forEach(function(b){if(b.type==='route')write(b.text,pad,y+b.h/2+4,font(700,22),'#1c5566');else if(b.type==='date')write(b.text,pad+8,y+b.h/2+4,font(700,20),'#18232b');else{box(pad,y,width,b.h,b.fill);box(pad,y+b.h-1,width,1,'#d3dbd9');var left=pad;cols.forEach(function(col){if(tints[col.k])box(left,y,col.w,b.h-1,tints[col.k]);var value=b.x[col.k],seat=keys.indexOf(col.k)>=0,empty=seat&&!(Number(value)>0);write(empty?'—':(value||'—'),left+col.w/2,y+b.h/2,font(empty?400:(col.k==='dep'||col.k==='arr'?500:700),22),empty?'#8b979e':'#18232b','center');left+=col.w;});}y+=b.h;});
     return canvas;
   }
