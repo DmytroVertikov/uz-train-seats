@@ -96,7 +96,7 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
   function dateOrder(value){var m=String(value||'').match(/^(\d{1,2})\.(\d{1,2})$/);return m?Number(m[2])*100+Number(m[1]):999999;}
   function timeOrder(value){var m=String(value||'').match(/^(\d{1,2}):(\d{2})$/);return m?Number(m[1])*60+Number(m[2]):-1;}
   function arrivalOrder(row){var arrival=timeOrder(row.arr),departure=timeOrder(row.dep);if(arrival<0)return -1;return departure>=0&&arrival<departure?arrival+1440:arrival;}
-  function compareRows(a,b){var day=dateOrder(a.x.date)-dateOrder(b.x.date);if(day)return day;var departure=timeOrder(a.x.dep)-timeOrder(b.x.dep);if(departure)return departure;var sameNumber=String(a.x.number||'').toLocaleUpperCase('ru')===String(b.x.number||'').toLocaleUpperCase('ru');if(sameNumber)return arrivalOrder(b.x)-arrivalOrder(a.x);return a.i-b.i;}
+  function compareRows(a,b){var day=dateOrder(a.x.date)-dateOrder(b.x.date);if(day)return day;var departure=timeOrder(a.x.dep)-timeOrder(b.x.dep);if(departure)return departure;var number=String(a.x.number||'').toLocaleUpperCase('ru').localeCompare(String(b.x.number||'').toLocaleUpperCase('ru'),'ru',{numeric:true});return number||arrivalOrder(b.x)-arrivalOrder(a.x)||a.i-b.i;}
   function isKyivStation(value){return /^(?:київ|киев|kyiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
   function isKharkivStation(value){return /^(?:харків|харьков|kharkiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
   function isOdesaStation(value){return /^(?:одеса|одесса|odesa|odessa)(?:[-\s.]|$)/i.test(String(value||'').trim());}
