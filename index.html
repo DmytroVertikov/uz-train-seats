@@ -55,6 +55,12 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
       <h3 class="table-subtitle">В Одессу</h3>
       <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="toOdRows"></tbody></table><div class="empty" id="toOdEmpty" hidden>Поездов в Одессу пока нет.</div></div>
       <button class="btn small ghost add-row" type="button" data-add="toOd">+ Добавить строку</button> <button class="btn small add-row" type="button" data-image="toOd">Картинка</button>
+      <h3 class="table-subtitle">Из Кривого Рога</h3>
+      <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="fromKrRows"></tbody></table><div class="empty" id="fromKrEmpty" hidden>Поездов из Кривого Рога пока нет.</div></div>
+      <button class="btn small ghost add-row" type="button" data-add="fromKr">+ Добавить строку</button> <button class="btn small add-row" type="button" data-image="fromKr">Картинка</button>
+      <h3 class="table-subtitle">В Кривой Рог</h3>
+      <div class="table-wrap"><table><thead><tr><th>Дата</th><th>Номер</th><th>Отпр.</th><th>Приб.</th><th>Л</th><th>К</th><th>ЖК</th><th>ДК</th><th>П</th><th>С1</th><th>С2</th><th>С3</th><th>Маршрут</th></tr></thead><tbody id="toKrRows"></tbody></table><div class="empty" id="toKrEmpty" hidden>Поездов в Кривой Рог пока нет.</div></div>
+      <button class="btn small ghost add-row" type="button" data-add="toKr">+ Добавить строку</button> <button class="btn small add-row" type="button" data-image="toKr">Картинка</button>
       <p class="privacy">Данные сохраняются в этом браузере. Сохраняйте резервную копию через экспорт CSV.</p>
     </section>
   </main>
@@ -100,7 +106,8 @@ tr.tone-a td:not([data-col="jk"]):not([data-col="dk"]){background:#edf2f6}tr.ton
   function isKyivStation(value){return /^(?:київ|киев|kyiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
   function isKharkivStation(value){return /^(?:харків|харьков|kharkiv)(?:[-\s.]|$)/i.test(String(value||'').trim());}
   function isOdesaStation(value){return /^(?:одеса|одесса|odesa|odessa)(?:[-\s.]|$)/i.test(String(value||'').trim());}
-  var tableDefs=[{id:'from',label:'Из Киева',city:isKyivStation,end:0,template:'Киев - ?'},{id:'to',label:'В Киев',city:isKyivStation,end:1,template:'? - Киев'},{id:'fromKh',label:'Из Харькова',city:isKharkivStation,end:0,template:'Харьков - ?'},{id:'toKh',label:'В Харьков',city:isKharkivStation,end:1,template:'? - Харьков'},{id:'fromOd',label:'Из Одессы',city:isOdesaStation,end:0,template:'Одесса - ?'},{id:'toOd',label:'В Одессу',city:isOdesaStation,end:1,template:'? - Одесса'}];
+  function isKryvyiRihStation(value){return /^(?:кривий\s+ріг|кривой\s+рог|kryvyi\s+rih)(?:[-\s.]|$)/i.test(String(value||'').trim());}
+  var tableDefs=[{id:'from',label:'Из Киева',city:isKyivStation,end:0,template:'Киев - ?'},{id:'to',label:'В Киев',city:isKyivStation,end:1,template:'? - Киев'},{id:'fromKh',label:'Из Харькова',city:isKharkivStation,end:0,template:'Харьков - ?'},{id:'toKh',label:'В Харьков',city:isKharkivStation,end:1,template:'? - Харьков'},{id:'fromOd',label:'Из Одессы',city:isOdesaStation,end:0,template:'Одесса - ?'},{id:'toOd',label:'В Одессу',city:isOdesaStation,end:1,template:'? - Одесса'},{id:'fromKr',label:'Из Кривого Рога',city:isKryvyiRihStation,end:0,template:'Кривой Рог - ?'},{id:'toKr',label:'В Кривой Рог',city:isKryvyiRihStation,end:1,template:'? - Кривой Рог'}];
   function inTable(row,table){var parts=String(row.route||'').split(/\s+-\s+|→|->/);return parts.length>1&&table.city(parts[table.end?parts.length-1:0]);}
   function trainKey(x){return String(x.number||'').trim().toLocaleUpperCase('ru').replace(/^777[КKОO]$/,'777К/О');}
   function trainTones(list){var tones=new Map();list.forEach(function(o){var n=trainKey(o.x);if(n&&!tones.has(n))tones.set(n,tones.size%2?'tone-b':'tone-a');});return tones;}
